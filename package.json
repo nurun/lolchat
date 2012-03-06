@@ -1,0 +1,22 @@
+{
+	"name": "lolchat",
+	"description": "A fun chat server!",
+	"version": "0.1.0",
+	"author": "Mathieu Sylvain <mathieu@ti-coco.com>",
+	"keywords": [
+		"chat",
+		"lol",
+		"bot",
+		"chatroom",
+		"irc"
+	],
+	"dependencies": {
+		"express": ">= 2",
+		"socket.io": ">= 0.9"
+/*		"dali": ">=0.1" NOT YET PROPERLY IN NPM */
+	},
+	"scripts": {
+		"start": "node server.js"
+	},
+	"engine": "node 0.6.x"
+}

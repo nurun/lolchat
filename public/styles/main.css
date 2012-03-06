@@ -1,0 +1,42 @@
+body {
+	min-height: 100%;
+	line-height: 1.1em;
+}
+
+body {
+	font-size: 11px;
+	color: #fff;
+	background: #000;
+	font-family: Lucida Console, Monaco, monospace;
+}
+#room {
+	font-size: 1.1em;
+	padding: 10px 10px 50px 10px;
+}
+
+input#messageInput {
+	position: fixed;
+	bottom: 2%;
+	left: 1%;
+	width: 98%;
+	height: 30px;
+	padding: 5px 10px 5px 10px;
+	font-size: 1.3em;
+	background: #444;
+	color: #fff;
+	font-family: Lucida Console, Monaco, monospace;
+	border: none;
+}
+
+.timestamp {
+	color: #666;
+}
+
+.username {
+	font-weight: bold;
+	color: #66F;
+}
+
+.message {
+	margin: 5px 0 0 0;
+}
