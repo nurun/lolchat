@@ -2,7 +2,7 @@ $(function () {
 
 	var $room = $("#room"),
 		$input = $("#messageInput")
-		socket = io.connect('http://localhost/');
+		socket = io.connect('/');
 
 	$input.focus();
 
