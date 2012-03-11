@@ -1,10 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>!lolchat!</title>
-		<script src="/scripts/jquery-1.7.1.min.js"></script>
-		<script src="/scripts/main.js"></script>
-		<script src="/socket.io/socket.io.js"></script>
+		<title>!lolchat! #{{out item.room }}</title>
 		<link rel="stylesheet" href="/styles/main.css" />
 	</head>
 	<body>
@@ -13,9 +10,15 @@
 		</div>
 		<div id="cli">
 			<form id="messageForm">
+				<input id="roomId" value="{{out item.room /}}" type="hidden" />
 				<input id="messageInput" />
 			</form>
 		</div>
-
 	</body>
+	<script src="/scripts/jquery-1.7.1.min.js"></script>
+	<script src="/scripts/EventEmitter/src/EventEmitter.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/scripts/tape/tape.js"></script>
+	<script src="/scripts/lolchat.js"></script>
+	<script src="/scripts/main.js"></script>
 </html>

@@ -12,8 +12,8 @@
 	],
 	"dependencies": {
 		"express": ">= 2",
-		"socket.io": ">= 0.9"
-/*		"dali": ">=0.1" NOT YET PROPERLY IN NPM */
+		"socket.io": ">= 0.9",
+		"dali": ">= 1.0"
 	},
 	"scripts": {
 		"start": "node server.js"

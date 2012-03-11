@@ -1,37 +1,69 @@
-$(function () {
+(function ($, lolchat) {
 
-	var $room = $("#room"),
-		$input = $("#messageInput")
-		socket = io.connect('/');
 
-	$input.focus();
+	$(function () {
 
-	socket.on('message', function (data) {
-		var timestamp, html, output;
-		timestamp = new Date(data.timestamp);
-		html = {
-			timestamp : "<span class='timestamp'>[" + timestamp.getHours() + ":" + timestamp.getMinutes() + "]</span>",
-			username : " <span class='username'>@" + data.username + "</span>",
-			message : " - <span class='message'>" + data.message + "</span>"
-		};
-		output = "<div class='message'>" + html.timestamp + html.username + html.message + "</div>";
-		$room.append(output);
+		var server, currentRoom, serverOptions, $room, roomId, $input, socket;
 
-		$('html, body').animate({
-			scrollTop: $(document).height()
-		}, 800);
+		$room = $("#room"); // Get the tag containing the room's messages
+		$input = $("#messageInput"); //
+		roomId = $("#roomId").val() || "welcome"; // Get the id of the current room from a hidden field
+
+		server = new lolchat.Server(serverOptions);
+
+		// Connect ot the server
+		server.connect("/", function () {
+			// Join the default room
+			currentRoom = server.room(roomId);
+			if (currentRoom) {
+				currentRoom.join();
+				// todo: reset the display and write the message backlog of this room
+				currentRoom.on("message", onMessage);
+			} else {
+				console.log("Failed to create room #" + roomId);
+			}
+		});
+
+		/**
+		 * When a messge received, display it!
+		 */
+		function onMessage(data) {
+			var timestamp, html, output;
+			timestamp = new Date(data.timestamp);
+			// build each segment of html for the message output
+			// todo: Use Dali instead ?
+			html = {
+				timestamp : "<span class='timestamp'>[" + timestamp.getHours() + ":" + timestamp.getMinutes() + "]</span>",
+				username : " <span class='username'>@" + data.username + "</span>",
+				message : " - <span class='message'>" + data.message + "</span>"
+			};
+
+			// Build and output the final message string
+			output = "<div class='message'>" + html.timestamp + html.username + html.message + "</div>";
+			$room.append(output);
+
+			// Scroll to the bottom of the chat log
+			$('html, body').animate({
+				scrollTop: $(document).height()
+			}, 800);
+		}
+
+		$("#messageForm").submit(function () {
+			var message;
+			message = $input.val(); // Get value from the input
+			$input.val(""); // Reset the input
+			if (currentRoom) { // If there is a current room connected
+				currentRoom.message(message); // send the message
+			} else {
+				console.error("Not connected! Message not sent.");
+			}
+			return false;
+		});
+
+
+		$input.focus(); // Put the focus on the input field
+
 	});
 
-	$("#messageForm").submit(function () {
-		var message;
-		message = $input.val();
-		$input.val("");
-		socket.emit("message", {
-			message: message
-		})
-
-		return false;
-	});
-
-})
+})(jQuery, lolchat);
 
