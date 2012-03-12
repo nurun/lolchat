@@ -1,7 +1,7 @@
 
 # LOLChat
 
-A fun chat room!
+A fun chat server!
 
 
 ## Features
@@ -16,43 +16,50 @@ A fun chat room!
 
 
 
-# Roadmap:
+# Roadmap/Sprints:
 
-## 0.1.1
+## Liquorice
 - done: Multiple Room
 - done: Create room from URL
 - done: Object model for rooms and server
 - done: Use "EventEmmiter"
 - done: Implement session from this recipe: http://www.danielbaulig.de/socket-ioexpress/
 
-## 0.1.2
+## Bazooka Joe
 - Support for "/" commands
 - /nick nickname : to choose a nickname
 - /exit : to exit a room
 - /room roomname : to enter a room
 - /list : list users in the room
+- Show messages backlog upon joining a room
+- Show status of connection in client
+- Show room members upon joining
 
-## 0.1.3
-- Private chats with user
+## Gobstopper
+- Send a private message to a user
+- Open a private room with one user
+- Highlight and hyperlink #roomnames in messages (server or client?)
+- Highlight and hyperlink @usernames in messages (server or client?)
+- Highlight and hyperlink URLs in messages (server or client?)
 
-## 0.1.4
+## Gummy Bear
 - System for RESTful bots
 - Connect Hubot
 
-## 0.1.5
-- Format URLs as links
+## Jolly Rancher
+- Persist session with Redis
 
-## 0.1.6
-- @username : to address message to specific user
-- @@username : to send private message
-- Highlight username as links
+## Fruit by the foot
+- Support for every-auth
+- User authenticate with Twitter
+- User authenticate with Facebook
+- User authenticate with LinkedIn
+- User authenticate with multiple services
+- Disconnect/Connect on client
 
-## 0.1.7
-- #roomname for room names
-- Highlight room names as links
 
-## 0.1.8
-- Mongo db persistance
+## Backlog
+- Client can connect to multiple rooms (not essential because we can use multiple tabs)
 
 
 
