@@ -14,13 +14,18 @@
 		// Connect ot the server
 		server.connect("/", function () {
 			// Join the default room
-			currentRoom = server.room(roomId);
-			if (currentRoom) {
-				currentRoom.join();
-				// todo: reset the display and write the message backlog of this room
-				currentRoom.on("message", onMessage);
-			} else {
-				console.log("Failed to create room #" + roomId);
+			console.log("connected !!!!!!!!");
+			// The "connec" event occurs many times, so first test if there is
+			// already a room created
+			if (!currentRoom) {
+				currentRoom = server.room(roomId);
+				if (currentRoom) {
+					currentRoom.join();
+					// todo: reset the display and write the message backlog of this room
+					currentRoom.on("message", onMessage);
+				} else {
+					console.log("Failed to create room #" + roomId);
+				}
 			}
 		});
 
@@ -45,7 +50,7 @@
 			// Scroll to the bottom of the chat log
 			$('html, body').animate({
 				scrollTop: $(document).height()
-			}, 800);
+			}, 0);
 		}
 
 		$("#messageForm").submit(function () {

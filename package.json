@@ -13,7 +13,8 @@
 	"dependencies": {
 		"express": ">= 2",
 		"socket.io": ">= 0.9",
-		"dali": ">= 1.0"
+		"dali": ">= 1.0",
+		"connect": ">= 2.0"
 	},
 	"scripts": {
 		"start": "node server.js"

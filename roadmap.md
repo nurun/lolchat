@@ -19,15 +19,15 @@ A fun chat room!
 # Roadmap:
 
 ## 0.1.1
-- Multiple Room
-- Create room from URL
-- User claims name
-- Object model for rooms and server
-- Use "EventEmmiter"
+- done: Multiple Room
+- done: Create room from URL
+- done: Object model for rooms and server
+- done: Use "EventEmmiter"
+- done: Implement session from this recipe: http://www.danielbaulig.de/socket-ioexpress/
 
 ## 0.1.2
-- Support for commands
-- Lobby for commands not in a room
+- Support for "/" commands
+- /nick nickname : to choose a nickname
 - /exit : to exit a room
 - /room roomname : to enter a room
 - /list : list users in the room
