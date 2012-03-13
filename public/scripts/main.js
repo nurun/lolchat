@@ -14,8 +14,7 @@
 		// Connect ot the server
 		server.connect("/", function () {
 			// Join the default room
-			console.log("connected !!!!!!!!");
-			// The "connec" event occurs many times, so first test if there is
+			// The "connect" event occurs many times, so first test if there is
 			// already a room created
 			if (!currentRoom) {
 				currentRoom = server.room(roomId);
@@ -39,7 +38,7 @@
 			// todo: Use Dali instead ?
 			html = {
 				timestamp : "<span class='timestamp'>[" + timestamp.getHours() + ":" + timestamp.getMinutes() + "]</span>",
-				username : " <span class='username'>@" + data.username + "</span>",
+				username : data.username ? " <span class='username'>@" + data.username + "</span>" : "",
 				message : " - <span class='message'>" + data.message + "</span>"
 			};
 

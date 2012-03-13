@@ -48,6 +48,8 @@ A fun chat server!
 
 ## Jolly Rancher
 - Persist session with Redis
+- externalize the lolchat object model classes in the "lolchat" module
+- load options/port config with nconf module
 
 ## Fruit by the foot
 - Support for every-auth
