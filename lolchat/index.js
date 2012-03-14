@@ -7,14 +7,29 @@ LOLChat aims to be as extensible and flexible as possible. To achieve this, the 
 In other words, LOLChat middlewares dont need to think about how the message has come to it or how it will go back to the user. No matter if the message is transported over http and WebSockets or by UDP or by a message queue, the request and response will be the same format.
 
  */
+var lolchat = module.exports = {};
+
 var
+		nconf = require('nconf'),
 		rooms = require('./rooms'),
 		connect = require('connect'),
 		Session = connect.middleware.session.Session,
 		parseCookie = connect.utils.parseCookie,
 		middleware = require("./middleware");
 
-var lolchat = module.exports = {};
+// Setup configuration manager and get/set helpers
+lolchat.config = nconf;
+lolchat.config
+		.argv()
+		.env()
+		.file({ file: 'config.json' });
+
+lolchat.get = function (key) {
+	return this.config.get(key);
+};
+lolchat.set = function (key, val) {
+	return this.config.set(key, val);
+};
 
 // Shorthand for middleware usage
 lolchat.middleware = middleware;

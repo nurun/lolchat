@@ -14,7 +14,9 @@
 		"express": ">= 2",
 		"socket.io": ">= 0.9",
 		"dali": ">= 1.0",
-		"connect": ">= 2.0"
+		"connect": ">= 2.0",
+		"winston": "0.5.x",
+		"nconf": "0.5.x"
 	},
 	"scripts": {
 		"start": "node server.js"

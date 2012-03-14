@@ -6,16 +6,8 @@
  * @param next - The callback to hand over control to other middlewares
  */
 function shout(message, response, env, next) {
-	if (response.broadcast) {
-		if (response.broadcast.message) {
-			response.broadcast.message = response.broadcast.message.toUpperCase();
-		}
-	}
-	if (response.private) {
-		if (response.private.message) {
-			response.private.message = response.private.message.toUpperCase();
-		}
-	}
+	response.broadcast.message = response.broadcast.message.toUpperCase();
+	response.private.message = response.private.message.toUpperCase();
 	next();
 }
 

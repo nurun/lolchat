@@ -4,7 +4,15 @@ var
 		connect = require('connect'),
 		MemoryStore = express.session.MemoryStore,
 		sessionStore = new MemoryStore(),
+		logger = require('winston'),
 		lolchat = require('./lolchat');
+
+//
+// Setup nconf to use (in-order):
+//   1. Command-line arguments
+//   2. Environment variables
+//   3. A file located at 'path/to/config.json'
+//
 
 // Configure the web server to support the lolchat server
 app.configure(function () {
@@ -14,7 +22,7 @@ app.configure(function () {
 	app.use(express.session({
 		store: sessionStore,
 		//todo: make the secret configurable
-		secret: '827hf7s62hk00s8763hfbf',
+		secret: lolchat.get("server:secret"),
 		key: 'express.sid'
 	}));
 	app.use(express.static(__dirname + '/public'));
@@ -39,13 +47,15 @@ app.get('/:room', function(req, res) {
 	});
 });
 
-
 // Configure the lolchat server
-var shout = require("./middleware/shout");
-lolchat.use(shout);
+var mom = require("./middleware/mom");
+lolchat.use(mom);
+
+
+var port = lolchat.get("server:port");
 
 // Connect the chat server to the web server
 lolchat.listen(app, sessionStore);
+app.listen(port);
 
-//todo: make port configurable
-app.listen(3101);
+logger.log("info", "lolchat server started on port: " + port);
