@@ -22,5 +22,9 @@
 	"scripts": {
 		"start": "node server.js"
 	},
-	"engine": "node 0.6.x"
+	"engine": "node 0.6.x",
+	"engines": {
+		"node": "0.6.x",
+		"npm": "1.0.x"
+	}
 }
