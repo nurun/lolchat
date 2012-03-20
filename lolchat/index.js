@@ -61,14 +61,14 @@ function onConnection(socket) {
 }
 
 function onJoin(data, done) {
-	var room = rooms.getRoom(data.room, {});
+	var room = rooms.getRoom(data.room, {
+		io: lolchat.io
+	});
 	if (room) {
 		// Connect the room to its own socket channel
 		// todo: See if the .in() room syntax of socket.io would be a better fit
-		var socket = lolchat.io.of("/" + room.id);
 		// todo: Find a better way for middleware dependency injection
 		room.middleware = lolchat.middleware;
-		room.listen(socket);
 		// Return the room id to the client (could be changed along the way for aliasses or sanitation)
 		done(null, {
 			room: room.id

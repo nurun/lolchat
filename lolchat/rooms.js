@@ -12,9 +12,14 @@ rooms.rooms = {};
 rooms.getRoom = function getRoom(id, options) {
 	if (!id) return null;
 	var room;
-	room = rooms[id];
+	room = rooms.rooms[id];
 	if (!room) {
+		var socket = options.io.of("/" + id);
 		room = rooms.rooms[id] = new rooms.Room(id, options);
+		room.listen(socket);
+		console.log("NEW room!");
+	} else {
+		console.log("Reuse room!");
 	}
 	return room;
 };
@@ -116,6 +121,8 @@ rooms.Room = function Room(id, options) {
 				//todo: log with loggly/winston lib
 				respond(response);
 			});
+			// persist the session (in case middlewares changed its state)
+			session.save();
 		}
 
 		// Send the response

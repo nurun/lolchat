@@ -5,7 +5,9 @@ var
 		MemoryStore = express.session.MemoryStore,
 		sessionStore = new MemoryStore(),
 		logger = require('winston'),
-		lolchat = require('./lolchat');
+		lolchat = require('./lolchat'),
+		RedisStore = require('connect-redis')(express),
+		store;
 
 //
 // Setup nconf to use (in-order):
@@ -16,11 +18,22 @@ var
 
 // Configure the web server to support the lolchat server
 app.configure(function () {
+
+	store = sessionStore;
+	if (lolchat.get("sessionStore") === "redis") {
+		logger.log("info", "Staring lolchat with the redis session store.");
+		store = new RedisStore({
+			host: "127.0.0.1",
+			port: "6379",
+			db: "lolchat"
+		});
+	}
+
 	app.set("view engine", "dali");
 	app.use(express.cookieParser());
 	// The session will be shared with lolchat
 	app.use(express.session({
-		store: sessionStore,
+		store: store,
 		//todo: make the secret configurable
 		secret: lolchat.get("server:secret"),
 		key: 'express.sid'
@@ -48,14 +61,14 @@ app.get('/:room', function(req, res) {
 });
 
 // Configure the lolchat server
-var mom = require("./middleware/mom");
-lolchat.use(mom);
+lolchat.use(require("./middleware/nick"));
+//lolchat.use(require("./middleware/mom"));
 
 
 var port = lolchat.get("server:port");
 
 // Connect the chat server to the web server
-lolchat.listen(app, sessionStore);
+lolchat.listen(app, store);
 app.listen(port);
 
 logger.log("info", "lolchat server started on port: " + port);

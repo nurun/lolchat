@@ -2,5 +2,6 @@
 	"server": {
 		"port": 3101,
 		"secret": "827hf7s62hk00s8763hfbf"
-	}
+	},
+	"sessionStore": "redis"
 }
