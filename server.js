@@ -9,13 +9,6 @@ var
 		RedisStore = require('connect-redis')(express),
 		store;
 
-//
-// Setup nconf to use (in-order):
-//   1. Command-line arguments
-//   2. Environment variables
-//   3. A file located at 'path/to/config.json'
-//
-
 // Configure the web server to support the lolchat server
 app.configure(function () {
 
@@ -65,7 +58,7 @@ lolchat.use(require("./middleware/nick"));
 //lolchat.use(require("./middleware/mom"));
 
 
-var port = lolchat.get("server:port");
+var port = process.env.PORT || lolchat.get("server:port");
 
 // Connect the chat server to the web server
 lolchat.listen(app, store);
